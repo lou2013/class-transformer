@@ -70,7 +70,7 @@ export class TransformOperationExecutor {
             }
             if (this.transformationType === TransformationType.CLASS_TO_PLAIN) {
             if(subValue[targetType.options.discriminator.property]){
-    subValue[(targetType as { options: TypeOptions }).options.discriminator.property] = (targetType as { options: TypeOptions }).options.discriminator.subTypes.find(subType=> { return subType.name === subValue[targetType.options.discriminator.property]; }).name;
+    subValue[(targetType as { options: TypeOptions }).options.discriminator.property] = (targetType as { options: TypeOptions }).options.discriminator.subTypes.find(subType=> { return subType.name === subValue[(targetType as { options: TypeOptions }).options.discriminator.property]; }).name;
 }else{
     subValue[(targetType as { options: TypeOptions }).options.discriminator.property]=targetType.typeFunction().name;
 }
