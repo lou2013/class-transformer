@@ -72,7 +72,7 @@ export class TransformOperationExecutor {
             if(subValue[targetType.options.discriminator.property]){
     subValue[(targetType as { options: TypeOptions }).options.discriminator.property] = (targetType as { options: TypeOptions }).options.discriminator.subTypes.find(subType=> { return subType.name === subValue[targetType.options.discriminator.property]; }).name;
 }else{
-    subValue[targetType.options.discriminator.property]=targetType.typeFunction().name;
+    subValue[(targetType as { options: TypeOptions }).options.discriminator.property]=targetType.typeFunction().name;
 }
             }
           } else {
