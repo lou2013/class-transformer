@@ -69,9 +69,11 @@ export class TransformOperationExecutor {
               realTargetType = subValue.constructor;
             }
             if (this.transformationType === TransformationType.CLASS_TO_PLAIN) {
-              subValue[targetType.options.discriminator.property] = targetType.options.discriminator.subTypes.find(
-                subType => subType.value === subValue.constructor
-              ).name;
+            if(subValue[targetType.options.discriminator.property]){
+    subValue[targetType.options.discriminator.property] = targetType.options.discriminator.subTypes.find(subType=> { return subType.name === subValue[targetType.options.discriminator.property]; }).name;
+}else{
+    subValue[targetType.options.discriminator.property]=targetType.typeFunction().name;
+}
             }
           } else {
             realTargetType = targetType;
