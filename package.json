@@ -6,10 +6,10 @@
   "license": "MIT",
   "readmeFilename": "README.md",
   "sideEffects": false,
-  "main": "./cjs/index.js",
-  "module": "./esm5/index.js",
-  "es2015": "./esm2015/index.js",
-  "typings": "./types/index.d.ts",
+  "main": "./build/cjs/index.js",
+  "module": "./build/esm5/index.js",
+  "es2015": "./build/esm2015/index.js",
+  "typings": "./build/types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/typestack/class-transformer.git"
@@ -23,8 +23,8 @@
     "typescript-serializer"
   ],
   "scripts": {
-    "build": "npm run build:cjs",
-    "install":"npm run build",
+    "build": "rimraf build && npm run build:cjs && npm run build:es2015 && npm run build:esm5 && npm run build:types && npm run build:umd ",
+    "install": "npm run build",
     "build:clean": "rimraf build",
     "build:es2015": "tsc --project tsconfig.prod.esm2015.json",
     "build:esm5": "tsc --project tsconfig.prod.esm5.json",
