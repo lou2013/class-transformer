@@ -23,9 +23,10 @@
     "typescript-serializer"
   ],
   "scripts": {
-    "build": "rimraf build && npm run build:cjs && npm run build:es2015 && npm run build:esm5 && npm run build:types && npm run build:umd ",
+    "build": "rimraf build && npm run build:cjs && npm run build:es2015 && npm run build:esm5 && npm run build:types ",
     "install": "npm run build",
     "build:clean": "rimraf build",
+    "postinstall": " npm run build:umd",
     "build:es2015": "tsc --project tsconfig.prod.esm2015.json",
     "build:esm5": "tsc --project tsconfig.prod.esm5.json",
     "build:cjs": "tsc --project tsconfig.prod.cjs.json",
