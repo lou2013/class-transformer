@@ -23,8 +23,6 @@
     "typescript-serializer"
   ],
   "scripts": {
-    "build": "rimraf build && npm run build:cjs && npm run build:es2015 && npm run build:esm5 && npm run build:types ",
-    "install": "npm run build",
     "build:clean": "rimraf build",
     "build:es2015": "tsc --project tsconfig.prod.esm2015.json",
     "build:esm5": "tsc --project tsconfig.prod.esm5.json",
@@ -37,8 +35,7 @@
     "lint:check": "eslint --max-warnings 0 --ext .ts src/",
     "test": "jest --coverage --verbose",
     "test:watch": "jest --watch",
-    "test:ci": "jest --runInBand --no-cache --coverage --verbose",
-    "postinstall": "mv bundles package.json README.md build && rimraf !**/build"
+    "test:ci": "jest --runInBand --no-cache --coverage --verbose"
   },
   "lint-staged": {
     "*.md": [
