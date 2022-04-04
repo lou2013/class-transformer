@@ -8,13 +8,13 @@ export default {
     {
       name: 'ClassTransformer',
       format: 'umd',
-      file: 'build/bundles/class-transformer.umd.js',
+      file: 'bundles/class-transformer.umd.js',
       sourcemap: true,
     },
     {
       name: 'ClassTransformer',
       format: 'umd',
-      file: 'build/bundles/class-transformer.umd.min.js',
+      file: 'bundles/class-transformer.umd.min.js',
       sourcemap: true,
       plugins: [terser()],
     },
