@@ -6,10 +6,10 @@
   "license": "MIT",
   "readmeFilename": "README.md",
   "sideEffects": false,
-  "main": "./build/cjs/index.js",
-  "module": "./build/esm5/index.js",
-  "es2015": "./build/esm2015/index.js",
-  "typings": "./build/types/index.d.ts",
+  "main": "./cjs/index.js",
+  "module": "./esm5/index.js",
+  "es2015": "./esm2015/index.js",
+  "typings": "./types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/typestack/class-transformer.git"
@@ -24,7 +24,6 @@
   ],
   "scripts": {
     "build": "rimraf build && npm run build:cjs && npm run build:es2015 && npm run build:esm5 && npm run build:types ",
-    "install": "npm run build",
     "build:clean": "rimraf build",
     "build:es2015": "tsc --project tsconfig.prod.esm2015.json",
     "build:esm5": "tsc --project tsconfig.prod.esm5.json",
@@ -37,13 +36,7 @@
     "lint:check": "eslint --max-warnings 0 --ext .ts src/",
     "test": "jest --coverage --verbose",
     "test:watch": "jest --watch",
-    "test:ci": "jest --runInBand --no-cache --coverage --verbose",
-    "postinstall": "mv bundles package.json README.md build && rimraf !**/build"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+    "test:ci": "jest --runInBand --no-cache --coverage --verbose"
   },
   "lint-staged": {
     "*.md": [

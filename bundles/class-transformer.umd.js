@@ -322,6 +322,9 @@
                             }
                             if (_this.transformationType === exports.TransformationType.CLASS_TO_PLAIN) {
                                 if (subValue[targetType.options.discriminator.property]) {
+                                    realTargetType = targetType.options.discriminator.subTypes.find(function (subType) {
+                                        return subType.name === subValue[targetType.options.discriminator.property];
+                                    }).value;
                                     subValue[targetType.options.discriminator.property] = targetType.options.discriminator.subTypes.find(function (subType) {
                                         return (subType.name === subValue[targetType.options.discriminator.property]);
                                     }).name;
@@ -498,9 +501,20 @@
                                         type = subValue.constructor;
                                     }
                                     if (this_1.transformationType === exports.TransformationType.CLASS_TO_PLAIN) {
-                                        if (subValue) {
-                                            subValue[metadata_1.options.discriminator.property] = metadata_1.options.discriminator.subTypes.find(function (subType) { return subType.value === subValue.constructor; }).name;
+                                        if (subValue[metadata_1.options.discriminator.property]) {
+                                            type = metadata_1.options.discriminator.subTypes.find(function (subType) { return subType.name === subValue[metadata_1.options.discriminator.property]; }).value;
+                                            subValue[metadata_1.options.discriminator.property] = metadata_1.options.discriminator.subTypes.find(function (subType) {
+                                                return subType.name === subValue[metadata_1.options.discriminator.property];
+                                            }).name;
                                         }
+                                        else {
+                                            subValue[metadata_1.options.discriminator.property] = type;
+                                        }
+                                        // if (subValue) {
+                                        //   subValue[metadata.options.discriminator.property] = metadata.options.discriminator.subTypes.find(
+                                        //     subType => subType.value === subValue.constructor
+                                        //   ).name;
+                                        // }
                                     }
                                 }
                                 else {
