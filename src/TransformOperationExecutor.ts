@@ -69,7 +69,7 @@ export class TransformOperationExecutor {
               realTargetType = subValue.constructor;
             }
             if (this.transformationType === TransformationType.CLASS_TO_PLAIN) {
-              if (subValue[targetType.options.discriminator.property]) {
+              if (subValue && subValue[targetType.options.discriminator.property]) {
                 realTargetType = (targetType as { options: TypeOptions }).options.discriminator.subTypes.find(
                   subType =>
                     subType.name === subValue[(targetType as { options: TypeOptions }).options.discriminator.property]
@@ -83,8 +83,8 @@ export class TransformOperationExecutor {
                 }).name;
               } else {
                 const options: TypeHelpOptions = { newObject: newValue, object: subValue, property: undefined };
-                subValue[(targetType as { options: TypeOptions }).options.discriminator.property] =
-                  targetType.typeFunction(options).name;
+                subValue?subValue[(targetType as { options: TypeOptions }).options.discriminator.property] =
+                  targetType.typeFunction(options).name:null;
               }
             }
           } else {
@@ -258,7 +258,7 @@ export class TransformOperationExecutor {
                   type = subValue.constructor;
                 }
                 if (this.transformationType === TransformationType.CLASS_TO_PLAIN) {
-                  if (subValue[metadata.options.discriminator.property]) {
+                  if (subValue && subValue instanceof Object && metadata.options.discriminator.property in subValue) {
                     type = metadata.options.discriminator.subTypes.find(
                       subType => subType.name === subValue[metadata.options.discriminator.property]
                     ).value;
@@ -268,7 +268,7 @@ export class TransformOperationExecutor {
                       }
                     ).name;
                   } else {
-                    subValue[metadata.options.discriminator.property] = type;
+                    subValue?subValue[metadata.options.discriminator.property] = type:null;
                   }
                   // if (subValue) {
                   //   subValue[metadata.options.discriminator.property] = metadata.options.discriminator.subTypes.find(
