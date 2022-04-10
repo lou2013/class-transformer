@@ -63,7 +63,7 @@ var TransformOperationExecutor = /** @class */ (function () {
                             realTargetType = subValue.constructor;
                         }
                         if (_this.transformationType === TransformationType.CLASS_TO_PLAIN) {
-                            if (subValue[targetType.options.discriminator.property]) {
+                            if (subValue && subValue[targetType.options.discriminator.property]) {
                                 realTargetType = targetType.options.discriminator.subTypes.find(function (subType) {
                                     return subType.name === subValue[targetType.options.discriminator.property];
                                 }).value;
@@ -73,8 +73,8 @@ var TransformOperationExecutor = /** @class */ (function () {
                             }
                             else {
                                 var options = { newObject: newValue_1, object: subValue, property: undefined };
-                                subValue[targetType.options.discriminator.property] =
-                                    targetType.typeFunction(options).name;
+                                subValue ? subValue[targetType.options.discriminator.property] =
+                                    targetType.typeFunction(options).name : null;
                             }
                         }
                     }
@@ -248,14 +248,14 @@ var TransformOperationExecutor = /** @class */ (function () {
                                     type = subValue.constructor;
                                 }
                                 if (this_1.transformationType === TransformationType.CLASS_TO_PLAIN) {
-                                    if (subValue[metadata_1.options.discriminator.property]) {
+                                    if (subValue && subValue instanceof Object && metadata_1.options.discriminator.property in subValue) {
                                         type = metadata_1.options.discriminator.subTypes.find(function (subType) { return subType.name === subValue[metadata_1.options.discriminator.property]; }).value;
                                         subValue[metadata_1.options.discriminator.property] = metadata_1.options.discriminator.subTypes.find(function (subType) {
                                             return subType.name === subValue[metadata_1.options.discriminator.property];
                                         }).name;
                                     }
                                     else {
-                                        subValue[metadata_1.options.discriminator.property] = type;
+                                        subValue ? subValue[metadata_1.options.discriminator.property] = type : null;
                                     }
                                     // if (subValue) {
                                     //   subValue[metadata.options.discriminator.property] = metadata.options.discriminator.subTypes.find(
